@@ -12,6 +12,3 @@
 !/log/.keep
 /tmp
 
-
-# Ignore database-environments' setup
-config/database.yml
