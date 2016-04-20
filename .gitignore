@@ -14,4 +14,4 @@
 
 
 # Ignore database-environments' setup
-database.yml
+config/database.yml
