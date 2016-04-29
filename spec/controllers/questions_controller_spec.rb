@@ -14,4 +14,14 @@ RSpec.describe QuestionsController, type: :controller do
 			expect(response).to have_http_status(:success)
 		end
 	end
+
+	describe "question#create action" do 
+		it "should successfully add a new question to our database" do
+			post :create, question: {content: "What is the salary?"}
+			expect(response).to redirect_to questions_path
+
+			question = Question.last
+			expect(question.content).to eq("What is the salary?")
+		end
+	end
 end
