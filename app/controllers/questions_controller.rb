@@ -10,7 +10,11 @@ class QuestionsController < ApplicationController
 
 	def create
 		@question = Question.create(question_params)
-		redirect_to questions_path
+		if @question.valid?
+			redirect_to questions_path
+		else
+			render :new, status: :unprocessable_entity
+		end
 	end
 
 	private

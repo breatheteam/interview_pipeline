@@ -23,5 +23,11 @@ RSpec.describe QuestionsController, type: :controller do
 			question = Question.last
 			expect(question.content).to eq("What is the salary?")
 		end
+
+		it "should not save a blank question" do 
+			post :create, question: {content: "" }
+			expect(response).to have_http_status(:unprocessable_entity)
+			expect(Question.count).to eq 0
+		end
 	end
 end
