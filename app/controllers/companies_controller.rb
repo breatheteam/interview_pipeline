@@ -1,9 +1,9 @@
 class CompaniesController < ApplicationController
 
-  #before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def create
-    @company = Company.create
+    @company = User.company.create
   end
 
 end
