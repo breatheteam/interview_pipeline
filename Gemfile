@@ -9,6 +9,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'devise'
 gem 'simple_form'
+gem 'bootstrap-sass', '~> 3.3.6'
 
 group :development, :test do
   gem 'pry-rails'
