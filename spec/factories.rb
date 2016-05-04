@@ -6,4 +6,9 @@ FactoryGirl.define do
     password "secretpassword"
     password_confirmation "secretpassword"
   end
+
+  factory :question do
+    content "What is the question?"
+    association :user
+  end
 end
