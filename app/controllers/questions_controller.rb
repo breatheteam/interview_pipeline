@@ -19,14 +19,14 @@ class QuestionsController < ApplicationController
 
 	def edit
 		@question = Question.find_by_id(params[:id])
-		if @question.blank?
-			return render_not_found if @question.blank?
-		end
+		return render_not_found if @question.blank?
+		return render_not_found(:forbidden) if @question.user != current_user
 	end 
 
 	def update
 		@question = Question.find_by_id(params[:id])
 		return render_not_found if @question.blank?
+		return render_not_found(:forbidden) if @question.user != current_user
 
 		@question.update_attributes(question_params)
 		if @question.valid?
@@ -36,13 +36,22 @@ class QuestionsController < ApplicationController
 		end
 	end
 
+	def destroy
+		@question = Question.find_by_id(params[:id])
+		return render_not_found if @question.blank?
+		return render_not_found(:forbidden) if @question.user != current_user
+
+		@question.destroy
+		redirect_to questions_path
+	end
+
 	private
 
 	def question_params
 		params.require(:question).permit(:content)
 	end
 
-	def render_not_found
-		render text: 'Not Found', status: :not_found
+	def render_not_found(status =:not_found)
+		render text: "#{status.to_s.titleize}", status: status
 	end
 end
