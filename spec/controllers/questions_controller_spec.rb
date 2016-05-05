@@ -41,7 +41,7 @@ RSpec.describe QuestionsController, type: :controller do
 			patch :update, id: question.id, question: { content: 'New'}
 			expect(response).to have_http_status(:forbidden)
 		end
-		
+
 		it "shouldn't let unauthenticated users update" do 
 			question = FactoryGirl.create(:question, content: "Original")
 			patch :update, id: question.id, question: { content: "New question"}
@@ -103,6 +103,20 @@ RSpec.describe QuestionsController, type: :controller do
 	end
 
 	describe "questions#index action" do
+		it "only returns array of questions created by current user" do
+			question = FactoryGirl.create(:question)
+			user = FactoryGirl.create(:user)
+			sign_in user
+			question2 = FactoryGirl.create(:question, content: "Dos Question", user_id: user.id)
+			expect(assigns[@questions]).to eq([question2])
+		end
+
+		it "assigns @questions" do
+			questions << FactoryGirl.create(:question).times(5)
+			sign_in question.user
+			get :index
+			expect(assigns(@questions)). to eq([question])
+		end
 		it "should require user to be logged in" do 
 			get :index
 			expect(response).to redirect_to new_user_session_path
