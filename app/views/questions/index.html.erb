@@ -1,1 +1,17 @@
 <h1>Manage Questions</h1>
+
+<%= link_to "Add a Question", new_question_path %>
+
+<br/>
+
+<table>
+  <% i = 0 %>
+  <% @questions.each do |question| %>
+    <% i += 1 %>
+    <tr>
+      <td><%= i %>. </td>
+      <td><%= question.content %></td>
+      <td><%= link_to "Edit/Delete Question", edit_question_path(question.id) %></td>
+    </tr>
+  <% end %> 
+</table>
