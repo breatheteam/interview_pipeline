@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
 	before_action :authenticate_user!
 	def index
-		@questions = Question.all
+		@questions = Question.where(user_id: current_user.id)
 	end
 
 	def new
