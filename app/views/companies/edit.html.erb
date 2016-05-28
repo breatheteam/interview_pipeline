@@ -1,4 +1,7 @@
 <h1>Edit Company</h1>
+<p>
+  <%= link_to "Back to companies", companies_path %>
+</p>
 <%= render "form" %>
 
 <table border="1px black solid;" cellpadding=10>
@@ -14,7 +17,17 @@
         <%= question.content %>
       </td>
       <td>
-        <%= question.answer.try(:content) %>
+        <% if answer = question.answer || question.build_answer %>
+          <%= simple_form_for [question, answer] do |f| %>
+            <%= f.input :content %>
+            <%= f.input :company_id,
+              as: :hidden,
+              input_html: {
+                value: @company.id
+              } %>
+            <%= f.button :submit %>
+          <% end %>
+        <% end %>
       </td>
     </tr>
   <% end %>
