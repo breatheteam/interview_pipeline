@@ -1,0 +1,21 @@
+<h1>Edit Company</h1>
+<%= render "form" %>
+
+<table border="1px black solid;" cellpadding=10>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Answer</th>
+    </tr>
+  </thead>
+  <% current_user.questions.each do |question| %>
+    <tr>
+      <td>
+        <%= question.content %>
+      </td>
+      <td>
+        <%= question.answer.try(:content) %>
+      </td>
+    </tr>
+  <% end %>
+</table>

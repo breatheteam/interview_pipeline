@@ -1,0 +1,36 @@
+<h1>Companies</h1>
+<p>
+  <%= link_to "Create a new company", new_company_path %>
+  <%= link_to "View Questions", questions_path %>
+</p>
+
+<div class="companies">
+  <ul>
+    <% @companies.each do |company| %>
+      <li>
+        <h3><%= company.name %></h3>
+        <p>
+          <%= link_to :edit, edit_company_path(company) %>
+        </p>
+        <table border="1px black solid;" cellpadding=10>
+          <thead>
+            <tr>
+              <th>Question</th>
+              <th>Answer</th>
+            </tr>
+          </thead>
+          <% current_user.questions.each do |question| %>
+            <tr>
+              <td>
+                <%= question.content %>
+              </td>
+              <td>
+                <%= question.answer.try(:content) %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </li>
+    <% end %>
+  </ul>
+</div>
