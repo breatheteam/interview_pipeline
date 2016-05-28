@@ -19,7 +19,11 @@
       <td>
         <% if answer = question.answer || question.build_answer %>
           <%= simple_form_for [question, answer] do |f| %>
-            <%= f.input :content %>
+            <%= f.input :content,
+              input_html: {
+                rows: 5,
+                cols: 30
+              } %>
             <%= f.input :company_id,
               as: :hidden,
               input_html: {
