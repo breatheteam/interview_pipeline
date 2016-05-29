@@ -3,7 +3,7 @@ class AnswersController < ApplicationController
 
   def create
     question = current_user.questions.find(params[:question_id])
-    answer = question.create_answer(answer_params)
+    answer = question.answers.create(answer_params)
     redirect_to edit_company_path(answer.company)
   end
 

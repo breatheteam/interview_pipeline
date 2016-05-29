@@ -25,7 +25,9 @@
                 <%= question.content %>
               </td>
               <td>
-                <%= question.answer.try(:content) %>
+                <%= question.answers
+                  .find_by(company_id: company.id)
+                  .try(:content) %>
               </td>
             </tr>
           <% end %>

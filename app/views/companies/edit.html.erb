@@ -17,7 +17,7 @@
         <%= question.content %>
       </td>
       <td>
-        <% if answer = question.answer || question.build_answer %>
+        <% if answer = question.answers.find_by(company_id: @company.id) || question.answers.new %>
           <%= simple_form_for [question, answer] do |f| %>
             <%= f.input :content,
               input_html: {

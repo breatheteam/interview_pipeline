@@ -7,6 +7,4 @@ class User < ActiveRecord::Base
   has_many :questions
   has_many :companies
   has_many :answers, through: :questions
-
-
 end
