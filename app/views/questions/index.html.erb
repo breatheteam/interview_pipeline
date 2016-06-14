@@ -1,0 +1,13 @@
+<h1>Questions</h1>
+<p>
+  <%= link_to "Companies", companies_path %>
+  <%= link_to "Add Question", new_question_path %>
+</p>
+<ul>
+  <% @questions.each do |question| %>
+    <li>
+      <%= question.content %>
+      <%= link_to :edit, edit_question_path(question) %>
+    </li>
+  <% end %>
+</ul>

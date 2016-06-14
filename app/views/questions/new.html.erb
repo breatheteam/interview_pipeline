@@ -1,0 +1,10 @@
+<%= simple_form_for @question do |f| %>
+  <%= f.input :content,
+    as: :text,
+    label: "Content: ",
+    input_html: {
+      cols: 50,
+      rows: 10
+    } %>
+  <%= f.button :submit, "Create"%>
+<% end %>

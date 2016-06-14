@@ -1,0 +1,38 @@
+<h1>Edit Company</h1>
+<p>
+  <%= link_to "Back to companies", companies_path %>
+</p>
+<%= render "form" %>
+
+<table border="1px black solid;" cellpadding=10>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>Answer</th>
+    </tr>
+  </thead>
+  <% current_user.questions.each do |question| %>
+    <tr>
+      <td>
+        <%= question.content %>
+      </td>
+      <td>
+        <% if answer = question.answers.find_by(company_id: @company.id) || question.answers.new %>
+          <%= simple_form_for [question, answer] do |f| %>
+            <%= f.input :content,
+              input_html: {
+                rows: 5,
+                cols: 30
+              } %>
+            <%= f.input :company_id,
+              as: :hidden,
+              input_html: {
+                value: @company.id
+              } %>
+            <%= f.button :submit %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
